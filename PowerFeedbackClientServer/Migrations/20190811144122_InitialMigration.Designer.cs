@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PowerFeedback.Api.Models;
+using PowerFeedbackClientServer.Models;
 
-namespace PowerFeedback.Api.Migrations
+namespace PowerFeedbackClientServer.Migrations
 {
     [DbContext(typeof(PfDbContext))]
-    [Migration("20190811123927_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190811144122_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,26 @@ namespace PowerFeedback.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("PowerFeedback.Api.DTOs.ContactRequest", b =>
+            modelBuilder.Entity("PowerFeedbackClientServer.DTOs.Sentiment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ContactId");
+
+                    b.Property<decimal>("Score")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContactId")
+                        .IsUnique()
+                        .HasFilter("[ContactId] IS NOT NULL");
+
+                    b.ToTable("Sentiments");
+                });
+
+            modelBuilder.Entity("PowerFeedbackClientServer.Models.Contact", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -43,29 +62,11 @@ namespace PowerFeedback.Api.Migrations
                     b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("PowerFeedback.Api.DTOs.Sentiment", b =>
+            modelBuilder.Entity("PowerFeedbackClientServer.DTOs.Sentiment", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ContactId");
-
-                    b.Property<decimal>("Score");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContactId")
-                        .IsUnique()
-                        .HasFilter("[ContactId] IS NOT NULL");
-
-                    b.ToTable("Sentiments");
-                });
-
-            modelBuilder.Entity("PowerFeedback.Api.DTOs.Sentiment", b =>
-                {
-                    b.HasOne("PowerFeedback.Api.DTOs.ContactRequest", "Contact")
+                    b.HasOne("PowerFeedbackClientServer.Models.Contact", "Contact")
                         .WithOne("Sentiment")
-                        .HasForeignKey("PowerFeedback.Api.DTOs.Sentiment", "ContactId");
+                        .HasForeignKey("PowerFeedbackClientServer.DTOs.Sentiment", "ContactId");
                 });
 #pragma warning restore 612, 618
         }

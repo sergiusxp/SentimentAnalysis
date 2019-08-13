@@ -5,11 +5,11 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.CognitiveServices.Language.TextAnalytics.Models;
-using PowerFeedback.Api.DTOs;
-using PowerFeedback.Api.Models;
-using PowerFeedback.Api.Services;
+using PowerFeedbackClientServer.DTOs;
+using PowerFeedbackClientServer.Models;
+using PowerFeedbackClientServer.Services;
 
-namespace PowerFeedback.Api.Controllers
+namespace PowerFeedbackClientServer.Controllers
 {
     [Route("api/SentimentAnalysis")]
     [ApiController]

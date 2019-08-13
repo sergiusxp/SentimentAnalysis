@@ -1,22 +1,21 @@
-﻿using PowerFeedback.Api.DTOs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PowerFeedback.Api.DTOs
+namespace PowerFeedbackClientServer.Models
 {
-    public class Sentiment
+    public class TextEntityMatch
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
         [Column(TypeName = "decimal(18,2)")]
         public decimal Score { get; set; }
-        public string ContactId { get; set; }
+        public string TextEntityId { get; set; }
 
-        public ContactRequest Contact { get; set; }
+        public TextEntity TextEntity { get; set; }
     }
 }

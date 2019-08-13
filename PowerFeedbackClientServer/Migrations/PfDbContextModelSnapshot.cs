@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PowerFeedback.Api.Models;
+using PowerFeedbackClientServer.Models;
 
-namespace PowerFeedback.Api.Migrations
+namespace PowerFeedbackClientServer.Migrations
 {
     [DbContext(typeof(PfDbContext))]
     partial class PfDbContextModelSnapshot : ModelSnapshot
@@ -19,7 +19,7 @@ namespace PowerFeedback.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("PowerFeedback.Api.DTOs.Sentiment", b =>
+            modelBuilder.Entity("PowerFeedbackClientServer.DTOs.Sentiment", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -38,7 +38,7 @@ namespace PowerFeedback.Api.Migrations
                     b.ToTable("Sentiments");
                 });
 
-            modelBuilder.Entity("PowerFeedback.Api.Models.Contact", b =>
+            modelBuilder.Entity("PowerFeedbackClientServer.Models.Contact", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -60,7 +60,7 @@ namespace PowerFeedback.Api.Migrations
                     b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("PowerFeedback.Api.Models.KeyPhrase", b =>
+            modelBuilder.Entity("PowerFeedbackClientServer.Models.KeyPhrase", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -76,7 +76,7 @@ namespace PowerFeedback.Api.Migrations
                     b.ToTable("KeyPhrases");
                 });
 
-            modelBuilder.Entity("PowerFeedback.Api.Models.TextEntity", b =>
+            modelBuilder.Entity("PowerFeedbackClientServer.Models.TextEntity", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -96,7 +96,7 @@ namespace PowerFeedback.Api.Migrations
                     b.ToTable("TextEntities");
                 });
 
-            modelBuilder.Entity("PowerFeedback.Api.Models.TextEntityMatch", b =>
+            modelBuilder.Entity("PowerFeedbackClientServer.Models.TextEntityMatch", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -113,30 +113,30 @@ namespace PowerFeedback.Api.Migrations
                     b.ToTable("TextEntitiesMatch");
                 });
 
-            modelBuilder.Entity("PowerFeedback.Api.DTOs.Sentiment", b =>
+            modelBuilder.Entity("PowerFeedbackClientServer.DTOs.Sentiment", b =>
                 {
-                    b.HasOne("PowerFeedback.Api.Models.Contact", "Contact")
+                    b.HasOne("PowerFeedbackClientServer.Models.Contact", "Contact")
                         .WithOne("Sentiment")
-                        .HasForeignKey("PowerFeedback.Api.DTOs.Sentiment", "ContactId");
+                        .HasForeignKey("PowerFeedbackClientServer.DTOs.Sentiment", "ContactId");
                 });
 
-            modelBuilder.Entity("PowerFeedback.Api.Models.KeyPhrase", b =>
+            modelBuilder.Entity("PowerFeedbackClientServer.Models.KeyPhrase", b =>
                 {
-                    b.HasOne("PowerFeedback.Api.DTOs.Sentiment", "Sentiment")
+                    b.HasOne("PowerFeedbackClientServer.DTOs.Sentiment", "Sentiment")
                         .WithMany()
                         .HasForeignKey("SentimentId");
                 });
 
-            modelBuilder.Entity("PowerFeedback.Api.Models.TextEntity", b =>
+            modelBuilder.Entity("PowerFeedbackClientServer.Models.TextEntity", b =>
                 {
-                    b.HasOne("PowerFeedback.Api.DTOs.Sentiment", "Sentiment")
+                    b.HasOne("PowerFeedbackClientServer.DTOs.Sentiment", "Sentiment")
                         .WithMany()
                         .HasForeignKey("SentimentId");
                 });
 
-            modelBuilder.Entity("PowerFeedback.Api.Models.TextEntityMatch", b =>
+            modelBuilder.Entity("PowerFeedbackClientServer.Models.TextEntityMatch", b =>
                 {
-                    b.HasOne("PowerFeedback.Api.Models.TextEntity", "TextEntity")
+                    b.HasOne("PowerFeedbackClientServer.Models.TextEntity", "TextEntity")
                         .WithMany()
                         .HasForeignKey("TextEntityId");
                 });

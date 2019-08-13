@@ -10,8 +10,8 @@ using PowerFeedback.Api.Models;
 namespace PowerFeedback.Api.Migrations
 {
     [DbContext(typeof(PfDbContext))]
-    [Migration("20190811124110_DecimalFix")]
-    partial class DecimalFix
+    [Migration("20190811144122_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,26 @@ namespace PowerFeedback.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("PowerFeedback.Api.DTOs.ContactRequest", b =>
+            modelBuilder.Entity("PowerFeedback.Api.DTOs.Sentiment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ContactId");
+
+                    b.Property<decimal>("Score")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContactId")
+                        .IsUnique()
+                        .HasFilter("[ContactId] IS NOT NULL");
+
+                    b.ToTable("Sentiments");
+                });
+
+            modelBuilder.Entity("PowerFeedback.Api.Models.Contact", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -45,26 +64,7 @@ namespace PowerFeedback.Api.Migrations
 
             modelBuilder.Entity("PowerFeedback.Api.DTOs.Sentiment", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ContactId");
-
-                    b.Property<decimal>("Score")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContactId")
-                        .IsUnique()
-                        .HasFilter("[ContactId] IS NOT NULL");
-
-                    b.ToTable("Sentiments");
-                });
-
-            modelBuilder.Entity("PowerFeedback.Api.DTOs.Sentiment", b =>
-                {
-                    b.HasOne("PowerFeedback.Api.DTOs.ContactRequest", "Contact")
+                    b.HasOne("PowerFeedback.Api.Models.Contact", "Contact")
                         .WithOne("Sentiment")
                         .HasForeignKey("PowerFeedback.Api.DTOs.Sentiment", "ContactId");
                 });

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PowerFeedback.Api.Models;
 
 namespace PowerFeedback.Api.Migrations
 {
     [DbContext(typeof(PfDbContext))]
-    partial class PfDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190811152608_Entities")]
+    partial class Entities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,22 +62,6 @@ namespace PowerFeedback.Api.Migrations
                     b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("PowerFeedback.Api.Models.KeyPhrase", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Key");
-
-                    b.Property<string>("SentimentId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SentimentId");
-
-                    b.ToTable("KeyPhrases");
-                });
-
             modelBuilder.Entity("PowerFeedback.Api.Models.TextEntity", b =>
                 {
                     b.Property<string>("Id")
@@ -118,13 +104,6 @@ namespace PowerFeedback.Api.Migrations
                     b.HasOne("PowerFeedback.Api.Models.Contact", "Contact")
                         .WithOne("Sentiment")
                         .HasForeignKey("PowerFeedback.Api.DTOs.Sentiment", "ContactId");
-                });
-
-            modelBuilder.Entity("PowerFeedback.Api.Models.KeyPhrase", b =>
-                {
-                    b.HasOne("PowerFeedback.Api.DTOs.Sentiment", "Sentiment")
-                        .WithMany()
-                        .HasForeignKey("SentimentId");
                 });
 
             modelBuilder.Entity("PowerFeedback.Api.Models.TextEntity", b =>

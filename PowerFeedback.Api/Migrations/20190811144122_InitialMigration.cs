@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PowerFeedback.Api.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,7 +29,7 @@ namespace PowerFeedback.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    Score = table.Column<decimal>(nullable: false),
+                    Score = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ContactId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PowerFeedback.Api.Services
+namespace PowerFeedbackClientServer.Services
 {
     public interface ISentimentAnalysisService
     {

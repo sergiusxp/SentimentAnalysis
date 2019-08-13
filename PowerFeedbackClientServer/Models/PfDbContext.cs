@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PowerFeedback.Api.DTOs;
+using PowerFeedbackClientServer.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PowerFeedback.Api.Models
+namespace PowerFeedbackClientServer.Models
 {
     public class PfDbContext : DbContext
     {
